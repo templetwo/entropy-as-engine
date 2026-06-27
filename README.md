@@ -32,15 +32,19 @@ A particle in a potential landscape under overdamped Langevin dynamics, two cond
 | **Arm A** | Conservativeness check (drive a particle, confirm the analytic steady state) | ✅ **PASS** — KL(driven‖analytic) 0.0002, overlap 0.993; analytic shortcut licensed |
 | **Arm B** | 2D chamber–channel–chamber, sharp τ\* crossover | ✅ **horizon knob confirmed** — engine P_L 0.51 → 0.91 monotone vs flat control 0.371 |
 | **Arm C** | τ\* tracks geometry (`τ\* ∝ L_ch²/D`) — the make-or-break test | ❌ **FALSIFIED** — τ\* is flat in L_ch (R²ₒᵣᵢgᵢₙ = −17.7). A D-scan shows τ\* ∝ 1/D (R²=0.97): τ\* is a diffusive geometric time set by **chamber** exploration (r_L), not **channel** length. See `RESULTS.md`. |
-| Arm D | Free Energy Principle (dual engine) | 🔜 v2 |
+| **v2** | First-passage discriminator (kinetic) | ✅ **thesis demonstrated** — MFPT ∝ sep²/D (R²=0.992) recovers the corridor signature occupancy is blind to; current test ⟨L_z⟩≈0 for the conservative engine. Engine vs readout: thermodynamically indistinguishable, kinetically distinguishable. |
+| Arm D | Free Energy Principle (dual engine) | 🔜 future |
 
 > **Outcome (see [RESULTS.md](RESULTS.md)).** The horizon knob is real (Phase 0, Arm B) and
-> the engine's organization obeys a genuine diffusive law (τ\* ∝ 1/D). But the specific
-> fingerprint designed to rule out "the entropic force is just a disguised reward"
-> (τ\* ∝ L_ch²/D) does **not** appear via the steady-state P_L observable — it is gated by
-> large-chamber self-exploration, not channel traversal. The disguised-reward objection
-> stays open; v2 needs a *dynamical* first-passage observable that must physically cross the
-> channel. A clean, honest negative on the discriminator, per the SPEC's falsifier clause.
+> the engine's organization obeys a genuine diffusive law (τ\* ∝ 1/D). The steady-state
+> discriminator τ\* ∝ L_ch²/D **failed** (Arm C) — a textbook consequence of detailed balance:
+> occupancy is blind to path lengths, which live only in kinetics. **v2 confirms the resolution:**
+> in a clean corridor, first-passage time **does** carry the corridor signature (MFPT ∝ sep²/D,
+> R²=0.992) while occupancy stays flat and the conservative engine force shows **zero probability
+> current** (⟨L_z⟩≈0 vs a rotational positive control). The sharp, defensible thesis: **engine and
+> readout entropy can be thermodynamically indistinguishable (identical occupancy, zero current)
+> yet kinetically distinguishable (first-passage under the τ-knob).** Prior-art context and honest
+> novelty accounting: [docs/PRIOR_ART_AND_NOVELTY.md](docs/PRIOR_ART_AND_NOVELTY.md).
 
 ### Phase 0 result
 

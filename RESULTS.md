@@ -137,6 +137,62 @@ and that framing is the honest one:
   2017) between chambers vs `L_ch`, plus a direct broken-detailed-balance / probability-current test
   (Battle–Broedersz, *Science* 2016) — predicted null here, which would itself be a clean result.
 
+## v2 — First-passage discriminator (the kinetic test)
+v1 showed the engine's *steady-state* occupancy is blind to channel length (Arm C). v2 tests
+the complementary **kinetic** observable. Critically, v1's 2D "wall + channel" has a
+barrier-free shortcut along y=0 (the wall term vanishes at y=0), so the crossing is gated by
+the well-depth ridge, not the channel length — which is *why* occupancy (and a naive MFPT)
+can't see L_ch there. v2 uses a clean **1D corridor** (two asymmetric wells — option-poor
+narrow + option-rich wide — separated by a flat plateau of length `sep`, the genuine diffusive
+bottleneck). Code: `src/landscape_v2.py`, `src/v2_firstpassage.py`, `src/v2_current.py`.
+
+**Part A — kinetics sees the corridor.** Mean first-passage time L→mid under natural dynamics:
+
+| sep | sep²/D | MFPT | CV |
+|---|---|---|---|
+| 4 | 16 | 22.7 | 0.99 |
+| 5 | 25 | 47.3 | 0.98 |
+| 6 | 36 | 79.8 | 1.00 |
+| 7 | 49 | 109.5 | 0.95 |
+| 8 | 64 | 138.1 | 0.99 |
+
+Fit **MFPT = 2.42·(sep²/D) − 12.5, R² = 0.992** — first-passage cleanly carries the corridor
+signature, the exact `L²/D` scaling v1's occupancy could not. (CV ≈ 1 → near-exponential FPT,
+i.e. escape-dominated with a diffusive corridor term.) Figure `figures/v2_firstpassage.png`.
+
+**Part B — occupancy carries no corridor-time signature.** Thermal P_R (option-rich basin) is
+**flat** in sep (0.46→0.52, spread 0.05) — detailed balance: occupancy is a functional of free
+energies only. The *engine* occupancy is **not** flat (0.78→0.60): its effective potential
+`U_eff = −T_c S_c` is geometry-coupled (the growing open plateau is option-rich, so it pulls
+future-seeking mass toward center). But this is a *steady-state S_c effect, not the kinetic
+`sep²/D` signature* — the corridor *time* lives only in Part A.
+
+**Part C — the thermodynamic null (with a positive control).** Probability-current /
+broken-detailed-balance test (`mean angular current ⟨L_z⟩`) on a 2D rotor `F_rot = ω(−y,x)`:
+
+| ω | ⟨L_z⟩ |
+|---|---|
+| 0.0 | **+0.0009** (conservative — engine's regime) |
+| 0.5 | +0.98 |
+| 1.0 | +1.97 |
+| 2.0 | +3.99 |
+
+The detector works (⟨L_z⟩ ≈ ω·⟨r²⟩, clear current for ω>0) and reads **zero at ω=0**. By Arm A
+the causal entropic force is conservative → it *is* the ω=0 case → **zero steady-state current,
+zero entropy production**. Under every standard NESS detector it registers as equilibrium.
+Figure `figures/v2_current.png`.
+
+**v2 verdict.** The sharp thesis is **demonstrated**: in this regime, engine and readout entropy
+are **thermodynamically indistinguishable** (identical occupancy structure, zero current — Parts
+B, C) yet **kinetically distinguishable** (first-passage carries the `sep²/D` corridor signature —
+Part A). The engine-vs-readout distinction is real but lives in *dynamics*, not in occupancy or
+in any current/entropy-production measure. This both **resolves v1** (the L-signature occupancy
+discarded is recovered kinetically) and **confirms the prior-art diagnosis** (the thermodynamics–
+kinetics separation; `docs/PRIOR_ART_AND_NOVELTY.md`). Honest caveat: this establishes that the
+*landscape's* corridor time is kinetic-only; a stronger v3 claim — that the **τ-knob** leaves a
+first-passage fingerprint no static U(x) can mimic — needs engine-*driven* first-passage under
+`U_eff(τ)` across τ, which is the natural next step.
+
 ## Honest caveats
 - Ran on the MacBook (NumPy fallback), not the Studio (JAX). The 2D engine is
   oracle-validated against the reference (corr 0.993, relL2 0.005), but the absolute S_c
