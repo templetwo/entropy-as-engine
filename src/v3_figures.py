@@ -317,8 +317,8 @@ def fig7_arc(d):
     eng = d["partD_current_engine"]
     ctrl = d["partD_current_control"]
 
-    fig = plt.figure(figsize=(11, 7.5))
-    gs = fig.add_gridspec(2, 2, hspace=0.32, wspace=0.25)
+    fig = plt.figure(figsize=(11, 9.0))
+    gs = fig.add_gridspec(2, 2, hspace=0.55, wspace=0.28)
 
     # v1/v2 occupancy panel — loaded from the committed v2 artifact (not literals)
     v2_path = "results/v2_firstpassage.npz"
